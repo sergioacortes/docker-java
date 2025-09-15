@@ -7,10 +7,10 @@ COPY src/JavaDockerApp/pom.xml .
 COPY src/JavaDockerApp/.mvn ./.mvn
 COPY src/JavaDockerApp/mvnw .
 
-RUN ./mvnw dependency:go-offline
+RUN /build/mvnw dependency:go-offline
 
-COPY ./src ./src
-RUN ./mvnw clean install -DskipTests
+COPY src/JavaDockerApp/src ./src
+RUN /build/mvnw clean install -DskipTests
 
 FROM eclipse-temurin:21.0.8_9-jre-alpine
 
