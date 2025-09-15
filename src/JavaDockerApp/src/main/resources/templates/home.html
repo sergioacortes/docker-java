@@ -1,0 +1,22 @@
+<!-- src/main/resources/templates/home.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: layout}">
+<section th:fragment="content">
+    <h2>Página de inicio</h2>
+    <p>Bienvenido a la aplicación.</p>
+
+    <table class="table table-striped">
+        <thead>
+            <th>first name</th>
+            <th>last name</th>
+        </thead>
+        <tbody>
+            <tr th:each="employee:${employees}">
+                <td th:text="|${employee.firstName}|"></td>
+                <td th:text="|${employee.lastName}|"></td>
+            </tr>
+        </tbody>
+    </table>
+
+</section>
+</html>
