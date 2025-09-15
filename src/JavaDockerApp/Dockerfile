@@ -3,9 +3,9 @@ WORKDIR /build
 
 EXPOSE 8080
 
-COPY ./pom.xml .
-COPY ./.mvn ./.mvn
-COPY ./mvnw .
+COPY src/JavaDockerApp/pom.xml .
+COPY src/JavaDockerApp/.mvn ./.mvn
+COPY src/JavaDockerApp/mvnw .
 
 RUN ./mvnw dependency:go-offline
 
