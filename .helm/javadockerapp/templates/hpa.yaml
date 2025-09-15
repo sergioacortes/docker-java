@@ -2,14 +2,14 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "dockerwalkthrough.fullname" . }}
+  name: {{ include "javadockerapp.fullname" . }}
   labels:
-    {{- include "dockerwalkthrough.labels" . | nindent 4 }}
+    {{- include "javadockerapp.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "dockerwalkthrough.fullname" . }}
+    name: {{ include "javadockerapp.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:

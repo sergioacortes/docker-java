@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "dockerwalkthrough.name" -}}
+{{- define "javadockerapp.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "dockerwalkthrough.fullname" -}}
+{{- define "javadockerapp.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "dockerwalkthrough.chart" -}}
+{{- define "javadockerapp.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "dockerwalkthrough.labels" -}}
-helm.sh/chart: {{ include "dockerwalkthrough.chart" . }}
-{{ include "dockerwalkthrough.selectorLabels" . }}
+{{- define "javadockerapp.labels" -}}
+helm.sh/chart: {{ include "javadockerapp.chart" . }}
+{{ include "javadockerapp.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "dockerwalkthrough.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "dockerwalkthrough.name" . }}
+{{- define "javadockerapp.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "javadockerapp.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "dockerwalkthrough.serviceAccountName" -}}
+{{- define "javadockerapp.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "dockerwalkthrough.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "javadockerapp.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "dockerwalkthrough.fullname" . }}
+  name: {{ include "javadockerapp.fullname" . }}
   labels:
-    {{- include "dockerwalkthrough.labels" . | nindent 4 }}
+    {{- include "javadockerapp.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -12,4 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "dockerwalkthrough.selectorLabels" . | nindent 4 }}
+    {{- include "javadockerapp.selectorLabels" . | nindent 4 }}
