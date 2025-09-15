@@ -7,6 +7,8 @@ COPY src/JavaDockerApp/pom.xml .
 COPY src/JavaDockerApp/.mvn ./.mvn
 COPY src/JavaDockerApp/mvnw .
 
+RUN chmod +x /root/src/mvnw
+
 RUN /root/src/mvnw dependency:go-offline
 
 COPY src/JavaDockerApp/src ./src
