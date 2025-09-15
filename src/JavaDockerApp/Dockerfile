@@ -17,6 +17,6 @@ RUN /root/src/mvnw clean install -DskipTests
 FROM eclipse-temurin:21.0.8_9-jre-alpine
 
 WORKDIR /app
-COPY --from=BUILD /build/target/JavaDockerApp-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=BUILD /build/src/target/JavaDockerApp-0.0.1-SNAPSHOT.jar app.jar
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
