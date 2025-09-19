@@ -3,7 +3,7 @@ name: GitVersion - PR
 env:
   BUILD_CONFIGURATION: Release
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}  
+  IMAGE_BASE_PATH: ghcr.io/${{ github.actor }}/images
   GITVERSION_VERSION: 6.3.0
 
 on:
@@ -90,13 +90,13 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.IMAGE_BASE_PATH }}/docker-java
 
       - name: Calculate docker tags
         id: docker_tags
         run: |
           
-          IMAGE=${{ env.REGISTRY }}/${{ github.actor }}/docker-java/javadockerapp
+          IMAGE=${{ env.IMAGE_BASE_PATH }}/docker-java
           TAGS="$IMAGE:${{ env.SEMVER }}"
           
           if [[ "${{ env.MERGE }}" == "true" ]]; then
@@ -122,7 +122,7 @@ jobs:
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v2
         with:
-          subject-name: ${{ env.REGISTRY }}/${{ github.actor }}/docker-java/javadockerapp
+          subject-name: ${{ env.IMAGE_BASE_PATH }}/docker-java
           subject-digest: ${{ steps.build_docker.outputs.digest }}
           push-to-registry: false
          
@@ -161,8 +161,8 @@ jobs:
 
       - name: Helm package
         run: |
-          helm package ./.helm/javadockerapp --version ${{ env.SEMVER }} --destination ./.helm/javadockerapp
+          helm package ./.helm/docker-java --version ${{ env.SEMVER }} --destination ./.helm/docker-java
       
       - name: Helm push
         run: |
-          helm push ./.helm/javadockerapp/javadockerapp-${{ env.SEMVER }}.tgz oci://${{ env.REGISTRY }}/${{ github.actor }}/charts
+          helm push ./.helm/docker-java/docker-java-${{ env.SEMVER }}.tgz oci://${{ env.REGISTRY }}/${{ github.actor }}/charts
