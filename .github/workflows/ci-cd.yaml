@@ -157,7 +157,7 @@ jobs:
 
       - name: Helm lint
         run: |
-          helm lint ./.helm/javadockerapp
+          helm lint ./.helm/docker-java
 
       - name: Helm package
         run: |
